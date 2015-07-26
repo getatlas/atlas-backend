@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
     Atlas
     ~~~~~
@@ -7,9 +8,8 @@
 """
 
 from flask import Flask
-from google.transit import gtfs_realtime_pb2 as gtfs
+import realtime
 import threading
-import urllib
 
 app = Flask(__name__)
 
