@@ -2,6 +2,7 @@
 
 from google.transit import gtfs_realtime_pb2 as gtfs
 import mta_pb2 as mta
+import stops
 import sys
 import urllib
 
@@ -23,9 +24,20 @@ def update():
             else:
                 entities[route_id] = [entity]
 
-    for entity in entities[sys.argv[1]]:
-        print entity
+    train = "4"
 
-    print len(entities[sys.argv[1]])
+    trains = {}
+
+    for entity in entities[train]:
+        # print entity
+
+        trains[entity.id] = {
+            'lat': stops.stops()[entity.vehicle.stop_id]['stop_lat'],
+            'lon': stops.stops()[entity.vehicle.stop_id]['stop_lon']
+        }
+
+        print trains[entity.id]
+
+    print len(entities[train])
 
 update()

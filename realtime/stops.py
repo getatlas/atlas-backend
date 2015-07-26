@@ -25,6 +25,4 @@ def stops():
                 'stop_lon': stopdata[5]
             }
 
-    print json.dumps(stops, sort_keys=True, indent=4)
-
-stops()
+    return stops
