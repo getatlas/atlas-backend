@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 
-stations = {}
+"""
+    stations.py
+    ~~~~~~~~~~~
+
+    Helper file for retrieving and returning data
+    about MTA subway stations.
+"""
+
+_stations = {}
 
 class Station(object):
 
@@ -11,6 +19,9 @@ class Station(object):
         self.name = data[2]
         self.lat = data[4]
         self.lon = data[5]
+
+
+# Parses CSV from stops.txt and saves it in memory
 
 def load_stations():
     f = open('stops.txt', 'r')
@@ -24,10 +35,13 @@ def load_stations():
             continue
 
         station = Station(line)
-        stations[id] = station
+        _stations[id] = station
+
+
+# Provides a more public method of retrieving a station
 
 def get_station(id):
     if len(stations) == 0:
         load_stations()
 
-    return stations[id]
+    return _stations[id]
