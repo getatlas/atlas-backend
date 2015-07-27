@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-    stations.py
-    ~~~~~~~~~~~
+    station.py
+    ~~~~~~~~~~
 
     Helper file for retrieving and returning data
     about MTA subway stations.
@@ -41,7 +41,7 @@ def load_stations():
 # Provides a more public method of retrieving a station
 
 def get_station(id):
-    if len(stations) == 0:
+    if len(_stations) == 0:
         load_stations()
 
     return _stations[id]
