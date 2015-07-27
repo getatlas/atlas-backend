@@ -17,8 +17,7 @@ class Station(object):
         id = data[0]
 
         self.name = data[2]
-        self.lat = data[4]
-        self.lon = data[5]
+        self.coords = [data[4], data[5]]
 
 
 # Parses CSV from stops.txt and saves it in memory

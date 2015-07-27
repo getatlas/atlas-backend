@@ -9,13 +9,24 @@
 """
 
 from google.transit import gtfs_realtime_pb2 as gtfs
+import shape
 import station
 
 class Train(object):
 
     def __init__(self, entity):
-        self.id = entity.id
+        self.id = entity.vehicle.trip.trip_id.split('_')[0]
         self.line = entity.vehicle.trip.route_id
+        self.shapeid = entity.vehicle.trip.trip_id.split('_')[1]
+
         self.status = entity.vehicle.current_status
-        self.timestamp = entity.vehicle.timestamp
-        self.stop = station.get_station(entity.vehicle.stop_id[:-1])
+        self.timestampe = entity.vehicle.timestamp
+        self.stations = [station.get_station(entity.vehicle.stop_id[:-1])]
+
+    def update(self, entity):
+        self.status = entity.vehicle.current_status
+        self.timestampe = entity.vehicle.timestamp
+        
+        s = station.get_station(entity.vehicle.stop_id[:-1])
+        if s not in self.stations:
+            self.stations.append(s)
