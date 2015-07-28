@@ -15,7 +15,7 @@ import station
 class Train(object):
 
     def __init__(self, entity):
-        self.id = entity.vehicle.trip.trip_id.split('_')[0]
+        self.id = entity.vehicle.trip.trip_id
         self.line = entity.vehicle.trip.route_id
         self.shapeid = entity.vehicle.trip.trip_id.split('_')[1]
 

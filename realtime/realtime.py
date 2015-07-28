@@ -27,7 +27,7 @@ def update():
                 train = trains[train.id]
                 station = train.stations[-1]
 
-                if train.id == '111200':
+                if train.id == '121550_4..N06R':
                     status = 'incoming at'
 
                     if train.status == 1:
