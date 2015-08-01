@@ -21,7 +21,7 @@ class Shape(object):
 # Parses CSV from shapes.txt and saves it in memory
 
 def load_shapes():
-    f = open('shapes.txt', 'r')
+    f = open('./subway/google_transit/shapes.txt', 'r')
     contents = f.read()
 
     path = []

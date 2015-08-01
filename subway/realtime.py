@@ -23,18 +23,18 @@ def update():
 
             if train.id in trains.keys():
                 trains[train.id].update(entity)
-
-                train = trains[train.id]
-                station = train.stations[-1]
-
-                if train.id == '121550_4..N06R':
-                    status = 'incoming at'
-
-                    if train.status == 1:
-                        status = 'stopped at'
-                    elif train.status == 2:
-                        status = 'in transit to'
-
-                    print 'The %s train is %s %s' % (train.line, status, station.name)
             else:
                 trains[train.id] = train
+
+            train = trains[train.id]
+            station = train.stations[-1]
+
+            if train.id == '055650_4..S01R':
+                status = 'incoming at'
+
+                if train.status == 1:
+                    status = 'stopped at'
+                elif train.status == 2:
+                    status = 'in transit to'
+
+                print 'The %s train is %s %s' % (train.line, status, station.name)

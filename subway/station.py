@@ -23,18 +23,25 @@ class Station(object):
 # Parses CSV from stops.txt and saves it in memory
 
 def load_stations():
-    f = open('stops.txt', 'r')
+    f = open('./subway/google_transit/stops.txt', 'r')
     contents = f.read()
 
+    i = -1
     for line in contents.split('\n'):
-        data = line.split(',')
-        id = data[0]
+        i += 1
 
-        if id.endswith('N') or id.endswith('S'):
+        if i == 0:
             continue
 
-        station = Station(line)
-        _stations[id] = station
+        data = line.split(',')
+        if len(data) == 10:
+            id = data[0]
+
+            if id.endswith('N') or id.endswith('S'):
+                continue
+
+            station = Station(line)
+            _stations[id] = station
 
 
 # Provides a more public method of retrieving a station

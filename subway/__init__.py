@@ -1,1 +1,1 @@
-import realtime
+from realtime import update

@@ -8,8 +8,19 @@
 """
 
 from flask import Flask
-import realtime.realtime as realtime
+import os
+# import realtime.realtime as realtime
+import subway
 import threading
+import urllib2
+
+# Rewrite this in actual python sometime soon
+# os.system("""cd ./subway\
+# && rm -rf google_transit*\
+# && mkdir google_transit\
+# && cd google_transit\
+# && wget http://web.mta.info/developers/data/nyct/subway/google_transit.zip\
+# && unzip google_transit.zip""")
 
 app = Flask(__name__)
 
@@ -17,10 +28,11 @@ app = Flask(__name__)
 def index():
     return 'hi there'
 
-def update_realtime():
-    realtime.update()
-    threading.Timer(5, update_realtime).start()
+def update():
+    subway.update()
+    threading.Timer(10, update).start()
 
 if __name__ == '__main__':
-    update_realtime()
+    # update()
+    subway.update()
     # app.run()
