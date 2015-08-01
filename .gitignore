@@ -5,3 +5,6 @@ __pycache__/
 
 # OS X
 .DS_Store
+
+# Google Transit Data
+*.txt
