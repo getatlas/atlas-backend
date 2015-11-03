@@ -14,6 +14,7 @@ import json
 import os
 import hurricane
 import subway
+import sqlite3
 import threading
 import urllib2
 import wifi
@@ -29,6 +30,7 @@ import wifi
 stormcenters = {}
 bikestations = {}
 wifihotspots = {}
+places = {}
 
 app = Flask(__name__)
 
@@ -40,6 +42,11 @@ def index():
 def get_bikes():
     global bikestations
     return Response(json.dumps(bikestations), mimetype='application/json')
+
+@app.route('/places')
+def get_places():
+    global places
+    return Response(json.dumps(places), mimetype='application/json')
 
 @app.route('/stormcenters')
 def get_stormcenters():
@@ -65,4 +72,8 @@ if __name__ == '__main__':
     bikestations = citibike.update()
     stormcenters = hurricane.update()
     wifihotspots = wifi.update()
-    app.run()
+
+    objects = sqlite3.connect('data.db').execute('select * from places order by id desc')
+    places = [dict(id=row[0], name=row[1], latitude=row[2], longitude=row[3]) for row in objects.fetchall()]
+
+    app.run(debug=True)
