@@ -74,6 +74,7 @@ if __name__ == '__main__':
     wifihotspots = wifi.update()
 
     objects = sqlite3.connect('data.db').execute('select * from places order by id desc')
-    places = [dict(id=row[0], name=row[1], latitude=row[2], longitude=row[3], types=row[4].split(',')) for row in objects.fetchall()]
+    places = [dict(id=row[0], name=row[1], lat=row[2], lon=row[3], type=row[4]) for row in objects.fetchall()]
+    places += bikestations
 
     app.run(debug=True, host='10.0.1.6')

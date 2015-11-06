@@ -13,8 +13,8 @@ import urllib
 citibike_url = 'http://www.citibikenyc.com/stations/json'
 
 def update():
-    stations = {}
-    
+    stations = []
+
     response = urllib.urlopen(citibike_url)
     data = json.loads(response.read())
     retrieved_stations = data['stationBeanList']
@@ -27,12 +27,15 @@ def update():
         lat = station['latitude']
         lon = station['longitude']
 
-        stations[id] = {
-            'name': name,
-            'available': available,
-            'total': total,
+        station_obj = {
+            'id': -1,
+            'name': 'Citibike Location',
             'lat': lat,
-            'lon': lon
+            'lon': lon,
+            'type': 'citibike',
+            'data': '{\'available\': %d, \'total\': %d}' % (available, total)
         }
+
+        stations.append(station_obj)
 
     return stations
